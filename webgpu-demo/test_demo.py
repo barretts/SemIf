@@ -4,7 +4,7 @@ from pathlib import Path
 WEBGPU = Path(__file__).resolve().parent
 
 def sources():
-    return {name: (WEBGPU / name).read_text() for name in ("index.html", "app.js", "worker.js", "README.md", "_headers")}
+    return {name: (WEBGPU / name).read_text(encoding="utf-8") for name in ("index.html", "app.js", "worker.js", "README.md", "_headers")}
 
 def test_static_runtime_and_pins():
     text = sources()
@@ -78,4 +78,4 @@ def test_identity_notice_and_ui_mode_switch():
     assert "Unsloppify site" in text["index.html"]
     assert 'document.body.classList.toggle("plain-ui", plain)' in text["app.js"]
     assert "semif-ui-mode" in text["app.js"]
-    assert "body.plain-ui" in (WEBGPU / "style.css").read_text()
+    assert "body.plain-ui" in (WEBGPU / "style.css").read_text(encoding="utf-8")
